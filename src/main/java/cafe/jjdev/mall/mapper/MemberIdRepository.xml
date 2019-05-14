@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cafe.jjdev.mall.mapper.MemberIdRepository">
+	<!-- 삭제한 아이디 저장 -->
+	<insert id="storetheMemberId"
+			parameterType="cafe.jjdev.mall.vo.Member">
+		INSERT INTO member_id_repository(
+			member_id
+		)VALUES(
+			#{memberId}
+		)
+	</insert>
+	
+	<!-- 가입하려는 아이디가 존재했는지 확인 -->
+	<select id="selectMemberId"
+			parameterType="cafe.jjdev.mall.vo.Member"
+			resultType="String">
+		SELECT 
+			member_id AS memberId
+		FROM 
+			member_id_repository
+		WHERE
+			member_id = #{memberId}
+	</select>
+</mapper>
