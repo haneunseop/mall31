@@ -36,6 +36,7 @@ $(document).ready(function(){
                 <th>productCommonPrice</th>
                 <th>productCommonDescription</th>
                 <th>productCommonDate</th>
+                <th>주문하기</th>
             </tr>
         </thead>
         <tbody>
@@ -47,6 +48,7 @@ $(document).ready(function(){
                     <td>${pcl.productCommonPrice}</td>
                     <td>${pcl.productCommonDescription}</td>
                     <td>${pcl.productCommonDate}</td>
+                    <td><a href="${pageContext.request.contextPath}/product/orderProduct?productCommonNo=${pcl.productCommonNo}">주문하기</a></td>
                 </tr>
             </c:forEach>
         </tbody>

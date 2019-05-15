@@ -9,6 +9,7 @@ public class ProductCommon {
 	private int productCommonPrice;
 	private String productCommonDescription;
 	private String productCommonDate;
+	private int productCommonState;
 	List<Product> products;
 	public int getProductCommonNo() {
 		return productCommonNo;
@@ -46,6 +47,12 @@ public class ProductCommon {
 	public void setProductCommonDate(String productCommonDate) {
 		this.productCommonDate = productCommonDate;
 	}
+	public int getProductCommonState() {
+		return productCommonState;
+	}
+	public void setProductCommonState(int productCommonState) {
+		this.productCommonState = productCommonState;
+	}
 	public List<Product> getProducts() {
 		return products;
 	}
@@ -57,7 +64,7 @@ public class ProductCommon {
 		return "ProductCommon [productCommonNo=" + productCommonNo + ", categoryNo=" + categoryNo
 				+ ", productCommonName=" + productCommonName + ", productCommonPrice=" + productCommonPrice
 				+ ", productCommonDescription=" + productCommonDescription + ", productCommonDate=" + productCommonDate
-				+ ", products=" + products + "]";
+				+ ", productCommonState=" + productCommonState + ", products=" + products + "]";
 	}
-
+	
 }

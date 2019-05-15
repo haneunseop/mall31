@@ -3,7 +3,7 @@
 
 
 <mapper namespace="cafe.jjdev.mall.mapper.ProductCommonMapper">
-<!-- 	<resultMap type="cafe.jjdev.mall.vo.ProductCommon"
+		<resultMap type="cafe.jjdev.mall.vo.ProductCommon"
 				id="ProductCommonMap">
 		<result column="product_common_no" property="productCommonNo"/>
 		<result column="category_no" property="categoryNo"/>
@@ -11,8 +11,9 @@
 		<result column="product_common_price" property="productCommonPrice"/>
 		<result column="product_common_description" property="productCommonDescription"/>
 		<result column="product_common_date" property="productCommonDate"/>
+		<result column="product_common_state" property="productCommonState"/>
 		
-		<collection property="product"
+		<collection property="products"
 					ofType="cafe.jjdev.mall.vo.Product">
 			<id column="product_no" property="productNo"/>
 			<result column="product_common_no" property="productCommonNo"/>
@@ -21,32 +22,40 @@
 			<result column="product_stock" property="productStock"/>
 		</collection>
 	</resultMap>
-	<select id="selectProductCommonByCategory"
-			parameterType="int"
-			resultMap="ProductCommonMap">
+	<select 
+		id="selectProductCommonByProductCommonNO"
+		parameterType="int"
+		resultMap="ProductCommonMap">
 		SELECT 
-			pc.product_common_no,
-			pc.category_no,
-			pc.product_common_name,
-			pc.product_common_price,
-			pc.product_common_description,
-			pc.product_common_date,
 			p.product_no,
 			p.product_common_no,
 			p.product_color,
 			p.product_size,
-			p.product_stock
-		FROM 
+			p.product_stock,
+			pc.category_no,
+			pc.product_common_no,
+			pc.product_common_name,
+			pc.product_common_price,
+			pc.product_common_description,
+			pc.product_common_date,
+			pc.product_common_state
+		FROM
 			product_common pc
-		INNER 
-			JOIN product p
-		ON 
+		INNER JOIN
+			product p
+		ON
 			pc.product_common_no = p.product_common_no
-	</select> -->
+		WHERE 
+			pc.product_common_no = #{productCommonNo}
+		ORDER BY
+			p.product_color,
+			p.product_size
+	</select>
 	
-	<select	id="selectProductCommonList"
-			parameterType="java.util.Map"
-			resultType="cafe.jjdev.mall.vo.ProductCommon">
+	<select	
+		id="selectProductCommonListByCategoryNo"
+		parameterType="java.util.Map"
+		resultType="cafe.jjdev.mall.vo.ProductCommon">
 		SELECT 
 			product_common_no AS productCommonNo,
 			category_no AS categoryNo,
@@ -58,33 +67,36 @@
 			product_common
 		WHERE 
 			category_no = #{categoryNo}
-			<if test="search != %%">
-				AND product_name LIKE #{searchWord}
+			<if test="search != '%%'">
+				AND product_common_name LIKE #{searchWord}
 			</if>
 		LIMIT
 			#{startRow}, 
 			#{rowPerPage}
 	</select>
 	
-	<select id="selectCount"
-			resultType="int">
+	<select 
+		id="selectCount"
+		resultType="int">
 		SELECT 
 			COUNT(*)
 		FROM 
 			product_common
 	</select>
 	
-	<insert id="insertProduct"
-			parameterType="cafe.jjdev.mall.vo.ProductCommon">
+	<insert 
+		id="insertProduct"
+		parameterType="cafe.jjdev.mall.vo.ProductCommon">
 		INSERT INTO
-	product_common(
-		category_no,
-		product_common_name,
-		product_common_price,
-		product_common_description,
-		product_common_date
-	)
-	VALUES
+			product_common
+			(
+				category_no,
+				product_common_name,
+				product_common_price,
+				product_common_description,
+				product_common_date
+			)
+		VALUES
 		(
 			#{categoryNo},
 			#{productCommonName},
@@ -93,4 +105,28 @@
 			DATE(now())
 		)
 	</insert>
+	
+	<resultMap 
+		type="cafe.jjdev.mall.vo.Product" 
+		id="ProductMap">
+		<result column="product_color" property="productColor"/>
+		<result column="product_size" property="productSize"/>
+		<result column="product_stock" property="productStock"/>
+	</resultMap>
+	<select 
+		id="selectProductByProductColor"
+		parameterType="String"
+		resultMap="ProductMap">
+		SELECT 
+			product_color,
+			product_size,
+			product_stock
+		FROM
+			product
+		WHERE
+			product_color = #{productColor}
+		ORDER BY
+			product_size ASC
+	</select>
+
 </mapper>
