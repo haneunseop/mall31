@@ -1,32 +1,49 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="cafe.jjdev.mall.mapper.BoardFileMapper">
-	<select id="selectBoardFile" parameterType="int" resultType="cafe.jjdev.mall.vo.BoardFile">
+	<resultMap type="cafe.jjdev.mall.vo.BoardFile" id="selectBoardFileResultMap">
+		<result column="board_file_no" property="boardFileNo"/>
+		<result column="board_no" property="boardNo"/>
+		<result column="board_file_origin_name" property="boardFileOriginName"/>
+		<result column="board_file_save_name" property="boardFileSaveName"/>
+		<result column="board_file_ext" property="boardFileExt"/>
+		<result column="board_file_size" property="boardFileSize"/>
+		<result column="board_file_type" property="boardFileType"/>
+		<result column="board_file_delete" property="boardFileDelete"/>
+	</resultMap>
+	<select id="selectBoardFile" parameterType="int" resultMap="selectBoardFileResultMap">
 		SELECT 
-            board_file_no AS boardFileNo
-            , board_no AS boardNo
-            , board_file_origin_name AS boardFileOriginName
-            , board_file_save_name AS boardFileSaveName
-            , board_file_ext AS boardFileExt
-            , board_file_size AS boardFileSize
-            , board_file_type AS boardFileType
-            , board_file_delete AS boardFileDelete
+            board_file_no,
+            board_no,
+            board_file_origin_name,
+            board_file_save_name,
+            board_file_ext,
+            board_file_size,
+            board_file_type,
+            board_file_delete
         FROM 
         	board_file
         WHERE 
         	board_no = #{boardNo}
 	</select>
-	<select id="selectBoardFileOne"
-			parameterType="int"
-			resultType="cafe.jjdev.mall.vo.BoardFile">
+	<resultMap type="cafe.jjdev.mall.vo.BoardFile" id="selectBoardFileOneResultMap">
+		<result column="board_file_no" property="boardFileNo"/>
+		<result column="board_no" property="boardNo"/>
+		<result column="board_file_origin_name" property="boardFileOriginName"/>
+		<result column="board_file_save_name" property="boardFileSaveName"/>
+		<result column="board_file_ext" property="boardFileExt"/>
+		<result column="board_file_size" property="boardFileSize"/>
+		<result column="board_file_type" property="boardFileType"/>
+	</resultMap>
+	<select id="selectBoardFileOne" parameterType="int" resultMap="selectBoardFileOneResultMap">
 		SELECT 
-            board_file_no AS boardFileNo
-            , board_no AS boardNo
-            , board_file_origin_name AS boardFileOriginName
-            , board_file_save_name AS boardFileSaveName
-            , board_file_ext AS boardFileExt
-            , board_file_size AS boardFileSize
-            , board_file_type AS boardFileType
+            board_file_no,
+            board_no,
+            board_file_origin_name,
+            board_file_save_name,
+            board_file_ext,
+            board_file_size,
+            board_file_type
         FROM 
         	board_file
         WHERE 
@@ -82,16 +99,27 @@
 		WHERE 
 			board_file_no = #{boardFileNo}
 	</update>
-	<select id="selectBoardFileForDelete" parameterType="int" resultType="cafe.jjdev.mall.vo.BoardFile">
+	
+	<resultMap type="cafe.jjdev.mall.vo.BoardFile" id="selectBoardFileForDeleteResultMap">
+		<result column="board_file_no" property="boardFileNo"/>
+		<result column="board_no" property="boardNo"/>
+		<result column="board_file_origin_name" property="boardFileOriginName"/>
+		<result column="board_file_save_name" property="boardFileSaveName"/>
+		<result column="board_file_ext" property="boardFileExt"/>
+		<result column="board_file_size" property="boardFileSize"/>
+		<result column="board_file_type" property="boardFileType"/>
+		<result column="board_file_delete" property="boardFileDelete"/>
+	</resultMap>
+	<select id="selectBoardFileForDelete" parameterType="int" resultMap="selectBoardFileForDeleteResultMap">
 		SELECT 
-            board_file_no AS boardFileNo
-            , board_no AS boardNo
-            , board_file_origin_name AS boardFileOriginName
-            , board_file_save_name AS boardFileSaveName
-            , board_file_ext AS boardFileExt
-            , board_file_size AS boardFileSize
-            , board_file_type AS boardFileType
-            , board_file_delete AS boardFileDelete
+            board_file_no,
+            board_no,
+            board_file_origin_name,
+            board_file_save_name,
+            board_file_ext,
+            board_file_size,
+            board_file_type,
+            board_file_delete
         FROM 
         	board_file
         WHERE 

@@ -44,14 +44,14 @@ $(document).ready(function(){
        		<c:if test="${productList == null}">
        			<option value='' selected>-- Color --</option>
        		</c:if>
-       		<!-- 내가 색상을 선택한 적이 있다면 선택한 색을 보여준다. -->
-       		<c:if test="${productList ne null}">
-       			<option value='${productList[0].productColor}' selected>${productList[0].productColor}</option>
-       		</c:if>
 	        <c:forEach var="product" items="${productCommon.products}">
-	        	<!-- 내가 선택한 색상을 제외하고 보여준다. -->
-	        	<c:if test="${product.productColor ne color && productList[0].productColor ne product.productColor}">
-	        		<option value="${product.productColor}">${product.productColor}</option>
+	        	<!-- 내가 선택한 색상을 보여준다. -->
+	        	<c:if test="${product.productColor ne color}">
+	        		<option value="${product.productColor}"
+	        		<c:if test="${productList[0].productColor eq product.productColor}">
+	        			selected
+	        		</c:if>
+	        		>${product.productColor}</option>
 	        		<c:set var="color" value="${product.productColor}"></c:set>
 	        	</c:if>
 	        </c:forEach>
@@ -67,22 +67,21 @@ $(document).ready(function(){
 				</c:forEach>
 			</c:if>
 		</select>
-		<!-- 몇개를 주문할 것인지 입력받는 태그 -->
+		<!-- 몇개를 주문할 것인지 입력받는데
+		+1 +10 -1 -10 버튼을 통해서 숫자를 입력하게 만들자 -->
 		<c:if test="${productList eq null}">
 			<input type="text" value="-- Quantity --" readonly="readonly">
 		</c:if>
 		<c:if test="${productList ne null}">
-			<input type="text" name="orderQuantity" value="발주량 입력(숫자)">
+
 		</c:if>
 		<!-- 색상을 골라야지 주문하기 버튼이 보인다. -->
 		<c:set var="order" value="주문하기"></c:set>
-		<div>
-			<button id="orderBtn" type="button">
-			<c:if test="${productList ne null}">
-				${order}
-			</c:if>
-			</button>
-		</div>
+		<c:if test="${productList ne null}">
+			<div>
+				<button id="orderBtn" type="button">주문하기</button>
+			</div>
+		</c:if>
     </form>
 </div>
 </body>

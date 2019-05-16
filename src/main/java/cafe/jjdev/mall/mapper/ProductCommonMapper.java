@@ -14,5 +14,7 @@ public interface ProductCommonMapper {
 	public int selectCount();
 	public void insertProduct(ProductCommon productCommon);
 	// 색상 값에 해당하는 size와 stock을 찾는 메소드
+	// 생각해보니 동적쿼리를 사용하면 되는거였는데 괜히 만들었다.
+	// 수정할 예정
 	public List<Product> selectProductByProductColor(String productColor);
 }

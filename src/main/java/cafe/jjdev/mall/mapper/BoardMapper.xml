@@ -10,12 +10,18 @@
         	board_no = #{boardNo}
     </select>
     
-    <select id="selectBoardList" parameterType="java.util.Map" resultType="cafe.jjdev.mall.vo.Board">
+    <resultMap type="" id="selectBoardListResultMap">
+    	<result column="board_no" property="boardNo"/>
+    	<result column="board_title" property="boardTitle"/>
+    	<result column="board_user" property="boardUser"/>
+    	<result column="board_date" property="boardDate"/>
+    </resultMap>
+    <select id="selectBoardList" parameterType="java.util.Map" resultMap="selectBoardListResultMap">
         SELECT 
-            board_no AS boardNo
-            , board_title AS boardTitle
-            , board_user AS boardUser
-            , board_date As boardDate
+            board_no,
+            board_title,
+            board_user,
+            board_date
         FROM 
         	board 
         ORDER BY 
@@ -25,7 +31,7 @@
         	#{beginRow}
         	, #{rowPerPage}
     </select>
-    
+     
     <select id="selectBoardCount" resultType="int">
         SELECT 
         	COUNT(*) 
@@ -33,13 +39,21 @@
         	board
     </select>
     
-    <select id="selectBoard" parameterType="int" resultType="cafe.jjdev.mall.vo.Board">
+    
+    <resultMap type="" id="selectBoardResultMap">
+    	<result column="board_no" property="boardNo"/>
+    	<result column="board_title" property="boardTitle"/>
+    	<result column="board_content" property="board_content"/>
+    	<result column="board_user" property="boardUser"/>
+    	<result column="board_date" property="boardDate"/>
+    </resultMap>       
+    <select id="selectBoard" parameterType="int" resultMap="selectBoardResultMap">
         SELECT
-            board_no AS boardNo 
-            ,board_title AS boardTitle
-            , board_content AS boardContent
-            , board_user AS boardUser
-            , board_date AS boardDate
+            board_no, 
+            board_title,
+            board_content,
+            board_user,
+            board_date
         FROM 
         	board 
         WHERE 
@@ -50,8 +64,8 @@
         UPDATE 
         	board 
         SET 
-        	board_title = #{boardTitle}
-            , board_content = #{boardContent} 
+        	board_title = #{boardTitle},
+            board_content = #{boardContent} 
         WHERE 
         	board_no = #{boardNo} 
         AND 
@@ -66,7 +80,6 @@
         AND 
         	board_pw = #{boardPw}
     </delete>
-    
     <insert id="insertBoard" parameterType="cafe.jjdev.mall.vo.Board" >
     	<selectKey resultType="int" keyProperty="boardNo" order="AFTER">
             SELECT 

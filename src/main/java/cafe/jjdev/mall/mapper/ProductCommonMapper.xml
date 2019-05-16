@@ -52,17 +52,25 @@
 			p.product_size
 	</select>
 	
+	<resultMap type="cafe.jjdev.mall.vo.ProductCommon" id="selectProductCommonListByCategoryNoResultMap">
+		<result column="product_common_no" property="productCommonNo"/>
+		<result column="category_no" property="categoryNo"/>
+		<result column="product_common_name" property="productCommonName"/>
+		<result column="product_common_price" property="productCommonPrice"/>
+		<result column="product_common_description" property="productCommonDescription"/>
+		<result column="product_common_date" property="productCommonDate"/>
+	</resultMap>
 	<select	
 		id="selectProductCommonListByCategoryNo"
 		parameterType="java.util.Map"
-		resultType="cafe.jjdev.mall.vo.ProductCommon">
+		resultMap="selectProductCommonListByCategoryNoResultMap">
 		SELECT 
-			product_common_no AS productCommonNo,
-			category_no AS categoryNo,
-			product_common_name AS productCommonName,
-			product_common_price AS productCommonPrice,
-			product_common_description AS productCommonDescription,
-			product_common_date AS productCommonDate
+			product_common_no,
+			category_no,
+			product_common_name,
+			product_common_price,
+			product_common_description,
+			product_common_date
 		FROM 
 			product_common
 		WHERE 

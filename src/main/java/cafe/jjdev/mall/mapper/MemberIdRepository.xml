@@ -17,7 +17,7 @@
 			parameterType="cafe.jjdev.mall.vo.Member"
 			resultType="String">
 		SELECT 
-			member_id AS memberId
+			member_id
 		FROM 
 			member_id_repository
 		WHERE

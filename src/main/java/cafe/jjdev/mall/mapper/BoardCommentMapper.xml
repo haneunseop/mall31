@@ -15,12 +15,18 @@
 		WHERE 
 			board_no = #{boradNo}
 	</delete>
-	<select id="selectBoardCommentListByBoardNo" parameterType="int" resultType="cafe.jjdev.mall.vo.BoardComment">
+	<resultMap type="cafe.jjdev.mall.vo.BoardComment" id="selectBoardCommentListByBoardNoResultMap">
+		<result column="board_comment_no" property="boardCommentNo"/>
+		<result column="board_no" property="boardNo"/>
+		<result column="board_comment_content" property="boardCommentContent"/>
+		<result column="board_comment_user" property="boardCommentUser"/>
+	</resultMap>
+	<select id="selectBoardCommentListByBoardNo" parameterType="int" resultMap="selectBoardCommentListByBoardNoResultMap">
 		SELECT 
-			board_comment_no AS boardCommentNo,
-			board_no AS boardNo,
-			board_comment_content AS boardCommentContent,
-			board_comment_user AS boardCommentUser
+			board_comment_no,
+			board_no,
+			board_comment_content,
+			board_comment_user
 		FROM 
 			board_comment
 		WHERE 

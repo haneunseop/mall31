@@ -1,13 +1,16 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="cafe.jjdev.mall.mapper.CategoryMapper">
+	<resultMap type="cafe.jjdev.mall.vo.Category" id="selectCategoryListResultMap">
+		<result column="category_no" property="categoryNo"/>
+		<result column="category_name" property="categoryName"/>
+	</resultMap>
 	<select id="selectCategoryList"
-			resultType="cafe.jjdev.mall.vo.Category">
+			resultMap="selectCategoryListResultMap">
 		SELECT 
-			category_no AS categoryNo,
-			category_name AS categoryName
+			category_no,
+			category_name
 		FROM
 			category
 	</select>
-
 </mapper>
