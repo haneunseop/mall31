@@ -19,4 +19,13 @@ public class IndexController {
 		model.addAttribute("categoryList", categoryList);
 		return "index";
 	}
+
+	@GetMapping("/home")
+	public String index() {
+		return "home";
+	}
 }
+
+
+
+

@@ -24,7 +24,7 @@ $(document).ready(function(){
 		console.log('orderBtn click test...');
 		//form을 submit
 		$('#orderProductForm').submit();
-	});
+	});	
 });
 </script> 
 

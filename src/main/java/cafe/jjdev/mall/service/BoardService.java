@@ -76,7 +76,7 @@ public class BoardService {
 		// 상세 조회
 		Board board = boardMapper.selectBoard(boardNo);
 		// 댓글 목록 조회
-		List<BoardComment> boardCommentList = boardCommentMapper.selectBoardCommentListByBoardNo(boardNo);
+		List<BoardComment> boardCommentList = boardCommentMapper.selectBoardCommentListByBoardNo1(boardNo);
 		System.out.println("[cafe.jjdev.mall.service.BoardService.getBoardAndCommentListAndFile] boardCommentList: "+boardCommentList);
 		// 첨부파일 조회
 		List<BoardFile> boardFileList = boardFileMapper.selectBoardFile(boardNo);

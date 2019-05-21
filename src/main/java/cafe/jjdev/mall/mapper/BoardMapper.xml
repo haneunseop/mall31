@@ -10,7 +10,7 @@
         	board_no = #{boardNo}
     </select>
     
-    <resultMap type="" id="selectBoardListResultMap">
+    <resultMap type="cafe.jjdev.mall.vo.Board" id="selectBoardListResultMap">
     	<result column="board_no" property="boardNo"/>
     	<result column="board_title" property="boardTitle"/>
     	<result column="board_user" property="boardUser"/>
@@ -40,7 +40,7 @@
     </select>
     
     
-    <resultMap type="" id="selectBoardResultMap">
+    <resultMap type="cafe.jjdev.mall.vo.Board" id="selectBoardResultMap">
     	<result column="board_no" property="boardNo"/>
     	<result column="board_title" property="boardTitle"/>
     	<result column="board_content" property="board_content"/>
