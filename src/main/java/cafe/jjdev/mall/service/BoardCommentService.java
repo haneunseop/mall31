@@ -32,10 +32,10 @@ public class BoardCommentService {
 	// 댓글 페이지 번호는 5개씩 보여줄 것이고, 이전(다음)을 누르면 5개의 댓글 페이지 번호가 뜰 것이다.
 	// 다음이 마지막 페이지일 때는 보이지 않게 할 것이다. 
 	public Map<String, Object> getBoardCommentListByBoardNoAndPaging(int boardNo, int currentPage){
-		System.out.println("[cafe.jjdev.mall.service.BoardCommentService.getBoardCommentListByBoardNoAndPaging] 서비스 실행 확인");
+		int pageNoPerPage = 5;
 		// 한 페이지에서 댓글이 몇개 보여질 것인지를 정하는 rowPerPage 변수.. LIMIT x, y에서 y
 		int rowPerPage = 5;
-		// 쿼리 행을 몇번째부터 보여줄 것인지를 정하는 변수.. LIMIT x, y에서 x
+		// 쿼리 행을 몇번째부터 보여줄 것인지를 정하는 startRow 변수.. LIMIT x, y에서 x
 		// EX) 현재 1페이지이고, rowPerPage가 5라면 LIMIT는 0,5가 되어야하고
 		// 현재 2페이지이고, rowPerPage가 5라면 LIMIT는 5,5가 되어야하고
 		// 현재 3페이지이고, rowPerPage가 5라면 LIMIT는 10,5가 되어야한다.
@@ -48,10 +48,12 @@ public class BoardCommentService {
 		map.put("rowPerPage", rowPerPage);
 		map.put("startRow", startRow);
 		List<BoardComment> boardCommentList = boardCommentMapper.selectBoardCommentListByBoardNo(map);
-		
+		System.out.println("[cafe.jjdev.mall.service.BoardCommentService.getBoardCommentListByBoardNoAndPaging] boardCommentList: "+boardCommentList);
 		// 마지막 페이지 구하기
 		// 댓글 전체의 수를 담을 변수를 초기화하고 마지막 페이지의 값을 담을 변수를 선언한다.
 		int totalRow = boardCommentMapper.selectBoardCommentCountByBoardNo(boardNo);
+		System.out.println("[cafe.jjdev.mall.service.BoardCommentService.getBoardCommentListByBoardNoAndPaging] totalRow: "+totalRow);
+		
 		int lastPage;
 		// 댓글 전체의 수가 한 페이지에 보여줄 변수의 값으로 나눴을 때, 나머지가 없으면 몫이 마지막 페이지의 값이다.  
 		// 댓글 전체의 수가 한 페이지에 보여줄 변수의 값으로 나눴을 때, 나머지가 존재하면 몫에서 1을 더한 값이 마지막 페이지다.
@@ -64,7 +66,7 @@ public class BoardCommentService {
 		
 		// 리턴하기
 		Map<String, Object> resultMap = new HashMap<String, Object>();
-
+		resultMap.put("pageNoPerPage", pageNoPerPage);
 		resultMap.put("lastPage", lastPage);
 		resultMap.put("boardCommentList", boardCommentList);
 		return resultMap;

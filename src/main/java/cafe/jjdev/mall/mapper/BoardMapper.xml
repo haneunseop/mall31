@@ -43,7 +43,7 @@
     <resultMap type="cafe.jjdev.mall.vo.Board" id="selectBoardResultMap">
     	<result column="board_no" property="boardNo"/>
     	<result column="board_title" property="boardTitle"/>
-    	<result column="board_content" property="board_content"/>
+    	<result column="board_content" property="boardContent"/>
     	<result column="board_user" property="boardUser"/>
     	<result column="board_date" property="boardDate"/>
     </resultMap>       

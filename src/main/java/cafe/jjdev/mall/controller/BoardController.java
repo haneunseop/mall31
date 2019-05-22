@@ -66,7 +66,6 @@ public class BoardController {
 		System.out.println("[cafe.jjdev.mall.controller.BoardController.getBoard] GET boardNo: "+boardNo);
 		Map<String, Object> map = boardService.getBoardAndCommentListAndFile(boardNo);
 		model.addAttribute("board", map.get("board"));
-		model.addAttribute("boardCommentList", map.get("boardCommentList"));
 		model.addAttribute("boardFileList", map.get("boardFileList"));
 		return "board/getBoard";
 	}
